@@ -109,7 +109,7 @@ export class ContactComponent implements OnInit {
     console.log(this.feedback);
     this.visibility = "hidden";
     this.showform = false;
-    this.fbservice.postFeedback(this.feedback)
+    this.fbservice.submitFeedback(this.feedback)
       .subscribe(feedback => {
          this.savedfeedback = feedback;
          this.feedback = null;

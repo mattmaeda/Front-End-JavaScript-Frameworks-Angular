@@ -1,8 +1,25 @@
 <div fxFlex fxFlexOffset="20px" class="form-size">
   <h3>Send us your Feedback</h3>
-  <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
+  <div *ngIf="savedfeedback" [@expand]>
+    <h3>Your Submission</h3>
+      <p>First Name: {{savedfeedback.firstname}}</p>
+      <p>Last Name: {{savedfeedback.lastname}}</p>
+      <p>Tel. Number: {{savedfeedback.telnum}}</p>
+      <p>Email: {{savedfeedback.email}}</p>
+      <p>Contact You?: {{savedfeedback.agree}}</p>
+      <p>How?: {{savedfeedback.contacttype}}</p>
+      <p>Feedback: {{savedfeedback.message}}</p>
+  </div>
+  <div *ngIf="errMess" [@expand]>
+    <h3>There was an error with your submission</h3>
+    <h4>{{errMess}}</h4>
+  </div>
+  <div [hidden]="showform || savedfeedback || errMess" [@expand]>
+    <h3>Submitting Form</h3>
+    <mat-spinner></mat-spinner>
+  </div>
 
-  <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+  <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" [@visibility]="visibility" [@expand]>
     <p>
       <mat-form-field class="half-width">
         <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
@@ -43,3 +60,4 @@
     <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
   </form>
 </div>
+
